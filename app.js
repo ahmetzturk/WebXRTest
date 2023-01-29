@@ -104,7 +104,7 @@ class App {
    */
   onXRFrame = (time, frame) => {
     /** Queue up the next draw request. */
-    // this.xrSession.requestAnimationFrame(this.onXRFrame);
+    this.xrSession.requestAnimationFrame(this.onXRFrame);
 
     /** Bind the graphics framebuffer to the baseLayer's framebuffer. */
     const framebuffer = this.xrSession.renderState.baseLayer.framebuffer
