@@ -40,7 +40,7 @@ class App {
   activateXR = async () => {
     try {
       /** Initialize a WebXR session using "immersive-ar". */
-      // this.xrSession = await navigator.xr.requestSession("immersive-ar");
+      this.xrSession = await navigator.xr.requestSession("immersive-ar");
       /** Alternatively, initialize a WebXR session using extra required features. */
       // this.xrSession = await navigator.xr.requestSession("immersive-ar", {
       //   requiredFeatures: ['hit-test', 'dom-overlay'],
@@ -84,7 +84,7 @@ class App {
     this.setupThreeJs();
 
     /** Setup an XRReferenceSpace using the "local" coordinate system. */
-    // this.localReferenceSpace = await this.xrSession.requestReferenceSpace('local');
+    this.localReferenceSpace = await this.xrSession.requestReferenceSpace('local');
 
     /** Create another XRReferenceSpace that has the viewer as the origin. */
     // this.viewerSpace = await this.xrSession.requestReferenceSpace('viewer');
@@ -107,24 +107,24 @@ class App {
     // this.xrSession.requestAnimationFrame(this.onXRFrame);
 
     /** Bind the graphics framebuffer to the baseLayer's framebuffer. */
-    // const framebuffer = this.xrSession.renderState.baseLayer.framebuffer
-    // this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, framebuffer)
-    // this.renderer.setFramebuffer(framebuffer);
+    const framebuffer = this.xrSession.renderState.baseLayer.framebuffer
+    this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, framebuffer)
+    this.renderer.setFramebuffer(framebuffer);
 
     /** Retrieve the pose of the device.
      * XRFrame.getViewerPose can return null while the session attempts to establish tracking. */
-    // const pose = frame.getViewerPose(this.localReferenceSpace);
-    // if (pose) {
-    //   /** In mobile AR, we only have one view. */
-    //   const view = pose.views[0];
+    const pose = frame.getViewerPose(this.localReferenceSpace);
+    if (pose) {
+      /** In mobile AR, we only have one view. */
+      const view = pose.views[0];
     //
-    //   const viewport = this.xrSession.renderState.baseLayer.getViewport(view);
-    //   this.renderer.setSize(viewport.width, viewport.height)
+      const viewport = this.xrSession.renderState.baseLayer.getViewport(view);
+      this.renderer.setSize(viewport.width, viewport.height)
     //
-    //   /** Use the view's transform matrix and projection matrix to configure the THREE.camera. */
-    //   this.camera.matrix.fromArray(view.transform.matrix)
-    //   this.camera.projectionMatrix.fromArray(view.projectionMatrix);
-    //   this.camera.updateMatrixWorld(true);
+      /** Use the view's transform matrix and projection matrix to configure the THREE.camera. */
+      this.camera.matrix.fromArray(view.transform.matrix)
+      this.camera.projectionMatrix.fromArray(view.projectionMatrix);
+      this.camera.updateMatrixWorld(true);
     //
     //   /** Conduct hit test. */
     //   const hitTestResults = frame.getHitTestResults(this.hitTestSource);
@@ -142,9 +142,9 @@ class App {
     //     this.reticle.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z)
     //     this.reticle.updateMatrixWorld(true);
     //   }
-    //   /** Render the scene with THREE.WebGLRenderer. */
-    //   this.renderer.render(this.scene, this.camera)
-    // }
+      /** Render the scene with THREE.WebGLRenderer. */
+      this.renderer.render(this.scene, this.camera)
+    }
   }
 
   /**
