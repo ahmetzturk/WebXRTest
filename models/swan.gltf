@@ -19,7 +19,7 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "SWAN.001",
+            "name" : "SWAN",
             "rotation" : [
                 0.70710688829422,
                 0,
