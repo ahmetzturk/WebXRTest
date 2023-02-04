@@ -32,7 +32,7 @@ class Reticle extends THREE.Object3D {
   }
 }
 
-window.gltfLoader.load("https://raw.githubusercontent.com/ahmetzturk/webxrmodels/main/tablo.gltf", function(gltf) {
+window.gltfLoader.load("https://raw.githubusercontent.com/ahmetzturk/webxrmodels/main/tablo4.gltf", function(gltf) {
   const tablo = gltf.scene.children.find(c => c.name === 'tablo')
   tablo.castShadow = true;
   window.tablo = gltf.scene;
