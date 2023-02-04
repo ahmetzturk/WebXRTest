@@ -62,7 +62,7 @@
     ],
     "meshes" : [
         {
-            "name" : "SWAN.001",
+            "name" : "SWAN",
             "primitives" : [
                 {
                     "attributes" : {
