@@ -182,6 +182,7 @@ class App {
     if (window.tablo) {
       const clone = window.tablo.clone();
       clone.position.copy(this.reticle.position);
+      clone.matrix = reticle.matrix;
       this.scene.add(clone)
   
       const shadowMesh = this.scene.children.find(c => c.name === 'shadowMesh');
