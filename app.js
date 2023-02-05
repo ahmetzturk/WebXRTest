@@ -140,7 +140,8 @@ class App {
         /** Update the reticle position. */
         this.reticle.visible = true;
         this.reticle.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z)
-        this.reticle.updateMatrixWorld(true);
+        //this.reticle.updateMatrixWorld(true);
+        this.reticle.matrix = hitPose.transform.matrix;
        }
       /** Render the scene with THREE.WebGLRenderer. */
       this.renderer.render(this.scene, this.camera)
@@ -182,7 +183,7 @@ class App {
     if (window.tablo) {
       const clone = window.tablo.clone();
       clone.position.copy(this.reticle.position);
-      clone.matrix = reticle.matrix;
+      clone.matrix = this.reticle.matrix;
       this.scene.add(clone)
   
       const shadowMesh = this.scene.children.find(c => c.name === 'shadowMesh');
